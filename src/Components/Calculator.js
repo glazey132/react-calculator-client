@@ -2,23 +2,26 @@ import React, { Component } from 'react';
 import Display from './Display';
 import Keyboard from './Keyboard';
 
-import calcularConstants from './calculatorConstants';
+import calcularConstants from '../constants/calculatorConstants';
 import _ from 'lodash';
 
 
 class Calculator extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       displayValue: '0',
       waitingForOperand: false,
       operator: null,
       value: null
     };
+
   }
 
   inputDigit = e => {
     const { waitingForOperand } = this.state;
+
     if (waitingForOperand) {
       this.setState({
         displayValue: e,
@@ -33,18 +36,21 @@ class Calculator extends Component {
 
   inputDecimal = () => {
     const { waitingForOperand } = this.state;
+
     if (waitingForOperand) {
       this.setState({
         displayValue: '.',
         waitingForOperand: false
       });
     }
+
     this.setState(prev => ({
       displayValue:
         prev.displayValue.indexOf('.') === -1
           ? prev.displayValue + '.'
           : prev.displayValue
     }));
+    
   };
 
   inputOperator = newOperator => {

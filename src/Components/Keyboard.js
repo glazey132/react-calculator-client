@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function Keyboard(props) {
   return (
@@ -28,22 +28,26 @@ const keyboardStyle = {
  * @param {*} key - button key
  */
 const keyStyleObj = function(key) {
-  let backgroundColor;
+  let keyColor;
   if (key === '+' || key === '-' || key === '*' || key === '/') {
-    backgroundColor = 'darkOrange';
+    keyColor = 'darkOrange';
   } else if (key === '=') {
-    backgroundColor = 'springGreen'
+    keyColor = 'springGreen'
   } else if (key === 'C') {
-    backgroundColor = 'tomato'
+    keyColor = 'tomato'
   }
   else {
-    backgroundColor = 'dodgerBlue'
+    keyColor = 'dodgerBlue'
   }
   return {
     width: '6rem',
     height: '4rem',
     margin: '.11rem',
-    backgroundColor: backgroundColor
+    borderRadius: '50px',
+    backgroundColor: 'rgb(35, 36, 37)',
+    marginBottom: '10px',
+    color: keyColor,
+    borderColor: keyColor
   }
 };
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Calculator from './Calculator';
 import Calculations from './Calculations';
 import io from 'socket.io-client';
@@ -11,21 +10,22 @@ class App extends Component {
       'https://react-calc-12345.herokuapp.com/',
       { transports: ['websocket'] }
     );
-    console.log("TCL: App -> constructor -> socket", socket)
+
     this.state = {
       socket,
       calculations: []
     };
 
     this.state.socket.on('calculationsUpdate', calcs => {
-    console.log("TCL: App -> constructor -> calcs", calcs)
       this.setState({
         calculations: calcs
       });
     });
 
-    this.state.socket.on('moung', calcs => {
-      console.log("TCL: App -> constructor -> mount", calcs)
+    this.state.socket.on('calculationsUpdate', calcs => {
+      this.setState({
+        calculations: calcs
+      });
     });
 
   }
@@ -33,9 +33,10 @@ class App extends Component {
   componentDidMount() {
     this.state.socket.emit('mount');
   }
+  
   render() {
     return (
-      <div className="App">
+      <div style={appStyle}>
           <Calculator socket={this.state.socket} />
           <Calculations
             socket={this.state.socket}
@@ -44,6 +45,16 @@ class App extends Component {
       </div>
     );
   }
+
+}
+
+const appStyle = {
+  textAlign: 'center',
+  backgroundColor: 'lightgrey',
+  minHeight: '100%',
+  height: '100%',
+  overflow: 'scroll',
+  display: 'flex',
 }
 
 export default App;
