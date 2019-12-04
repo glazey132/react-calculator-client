@@ -3,9 +3,6 @@ import Display from './Display';
 import Keyboard from './Keyboard';
 
 import calcularConstants from '../constants/calculatorConstants';
-import _ from 'lodash';
-
-
 class Calculator extends Component {
   constructor(props) {
     super(props);
